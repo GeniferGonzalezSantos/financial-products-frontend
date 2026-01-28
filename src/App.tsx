@@ -1,9 +1,9 @@
-import './App.css';
+import '@/App.css';
 
 function App() {
   return (
     <>
-      <h1>Financial Products Frontend</h1>
+      <h1>Financial Products Frontend </h1>
     </>
   );
 }
