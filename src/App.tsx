@@ -1,9 +1,10 @@
 import '@/App.css';
+import { ProductsPage } from './pages/ProductsPage';
 
 function App() {
   return (
     <>
-      <h1>Financial Products Frontend </h1>
+      <ProductsPage />
     </>
   );
 }
