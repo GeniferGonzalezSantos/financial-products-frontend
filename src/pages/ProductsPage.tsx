@@ -1,25 +1,33 @@
-import { ProductItem } from '@/components/ProductItem/productItem';
+import { ProductList } from '@/components/ProductList/ProductList';
+import { SearchInput } from '@/components/SearchInput/SearchInput';
+import type { FinancialProduct } from '@/types/Product';
+import { Box } from '@mui/material';
+import { useMemo, useState } from 'react';
 import { useProducts } from '@/hooks/useProducts';
-import { Grid } from '@mui/material';
 
 export function ProductsPage() {
+  const [search, setSearch] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedProduct, setSelectedProduct] =
+    useState<FinancialProduct | null>(null);
+
   const { products, toggleProductStatus } = useProducts();
 
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [products, search]);
+
   return (
-    <Grid
-      container
-      spacing={{ xs: 1, md: 3 }}
-      columns={{ xs: 2, sm: 8, md: 12 }}
-    >
-      {products.map((product) => (
-        <Grid size={{ xs: 2, sm: 4, md: 4 }}>
-          <ProductItem
-            key={product.id}
-            product={product}
-            onToggleStatus={toggleProductStatus}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <Box>
+      <SearchInput value={search} onChange={setSearch} />
+
+      <ProductList
+        products={filteredProducts}
+        onSelectProduct={setSelectedProduct}
+        onToggleStatus={toggleProductStatus}
+      />
+    </Box>
   );
 }
