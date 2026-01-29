@@ -1,18 +1,26 @@
+import { useEffect, useMemo, useState } from 'react';
+import { Box } from '@mui/material';
+
+import { useProducts } from '@/hooks/useProducts';
 import { ProductList } from '@/components/ProductList/ProductList';
 import { SearchInput } from '@/components/SearchInput/SearchInput';
-import type { FinancialProduct } from '@/types/Product';
-import { Box } from '@mui/material';
-import { useMemo, useState } from 'react';
-import { useProducts } from '@/hooks/useProducts';
 import { ProductDetailsModal } from '@/components/ProductDetailsModal/ProductDetailsModal';
 import { LoadingState } from '@/components/LoadingState/LoadingState';
+import { ErrorState } from '@/components/ErrorState/ErrorState';
+
+import type { FinancialProduct } from '@/types/Product';
 
 export function ProductsPage() {
   const [search, setSearch] = useState('');
-  //line so that the loading appears
-  // const [status, setStatus] = useState<RequestStatus>('loading');
-  const [selectedProduct, setSelectedProduct] = useState<FinancialProduct | null>(null);
-  const { products, toggleProductStatus } = useProducts();
+  const [selectedProduct, setSelectedProduct] =
+    useState<FinancialProduct | null>(null);
+
+  const { products, status, error, fetchProducts, toggleProductStatus } =
+    useProducts();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) =>
@@ -20,10 +28,14 @@ export function ProductsPage() {
     );
   }, [products, search]);
 
-  const hasError = search.length > 0 && filteredProducts.length === 0;
+  const hasSearchError = search.length > 0 && filteredProducts.length === 0;
 
   if (status === 'loading') {
-    return <LoadingState message="Carregando Produtos..." />
+    return <LoadingState message="Carregando produtos..." />;
+  }
+
+  if (status === 'error') {
+    return <ErrorState message={error ?? undefined} onRetry={fetchProducts} />;
   }
 
   return (
@@ -31,14 +43,16 @@ export function ProductsPage() {
       <SearchInput
         value={search}
         onChange={setSearch}
-        error={hasError}
-        helperText={hasError ? 'Nenhum produto encontrado' : undefined}
+        error={hasSearchError}
+        helperText={hasSearchError ? 'Nenhum produto encontrado' : undefined}
       />
+
       <ProductList
         products={filteredProducts}
         onSelectProduct={setSelectedProduct}
         onToggleStatus={toggleProductStatus}
       />
+
       <ProductDetailsModal
         product={selectedProduct}
         open={Boolean(selectedProduct)}
