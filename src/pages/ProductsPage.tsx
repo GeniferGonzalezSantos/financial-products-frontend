@@ -19,10 +19,16 @@ export function ProductsPage() {
     );
   }, [products, search]);
 
+  const hasError = search.length > 0 && filteredProducts.length === 0;
+
   return (
     <Box>
-      <SearchInput value={search} onChange={setSearch} />
-
+      <SearchInput
+        value={search}
+        onChange={setSearch}
+        error={hasError}
+        helperText={hasError ? 'Nenhum produto encontrado' : undefined}
+      />
       <ProductList
         products={filteredProducts}
         onSelectProduct={setSelectedProduct}
