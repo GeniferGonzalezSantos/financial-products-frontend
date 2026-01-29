@@ -4,10 +4,10 @@ import type { FinancialProduct } from '@/types/Product';
 import { Box } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useProducts } from '@/hooks/useProducts';
+import { ProductDetailsModal } from '@/components/ProductDetailsModal/ProductDetailsModal';
 
 export function ProductsPage() {
   const [search, setSearch] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedProduct, setSelectedProduct] =
     useState<FinancialProduct | null>(null);
 
@@ -27,6 +27,11 @@ export function ProductsPage() {
         products={filteredProducts}
         onSelectProduct={setSelectedProduct}
         onToggleStatus={toggleProductStatus}
+      />
+      <ProductDetailsModal
+        product={selectedProduct}
+        open={Boolean(selectedProduct)}
+        onClose={() => setSelectedProduct(null)}
       />
     </Box>
   );
