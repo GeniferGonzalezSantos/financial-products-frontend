@@ -4,7 +4,7 @@ export const financialProductsMock: FinancialProduct[] = [
   {
     id: '1',
     name: 'Cartão Itaú Platinum',
-    type: 'credit_card',
+    type: 'Cartão de Crédito',
     status: 'active',
     description:
       'Cartão de crédito com benefícios exclusivos, programa de pontos e anuidade diferenciada.',
@@ -14,7 +14,7 @@ export const financialProductsMock: FinancialProduct[] = [
   {
     id: '2',
     name: 'Empréstimo Pessoal',
-    type: 'loan',
+    type: 'Empréstimo',
     status: 'inactive',
     description: 'Empréstimo com parcelas fixas e contratação 100% digital.',
     interestRate: 2.1,
@@ -23,7 +23,7 @@ export const financialProductsMock: FinancialProduct[] = [
   {
     id: '3',
     name: 'CDB Itaú 120%',
-    type: 'investment',
+    type: 'Investimento',
     status: 'active',
     description:
       'Certificado de Depósito Bancário com rendimento atrelado ao CDI.',
@@ -32,7 +32,7 @@ export const financialProductsMock: FinancialProduct[] = [
   {
     id: '4',
     name: 'Cartão Itaú Gold',
-    type: 'credit_card',
+    type: 'Cartão de Crédito',
     status: 'inactive',
     description:
       'Cartão de crédito para o dia a dia, com aceitação internacional.',
@@ -42,7 +42,7 @@ export const financialProductsMock: FinancialProduct[] = [
   {
     id: '5',
     name: 'Crédito Consignado',
-    type: 'loan',
+    type: 'Empréstimo',
     status: 'active',
     description: 'Crédito com taxas reduzidas e desconto direto em folha.',
     interestRate: 1.8,

@@ -5,4 +5,7 @@ export interface FinancialProduct {
   name: string;
   type: string;
   status: ProductStatus;
+  description: string;
+  interestRate?: number | null;
+  createdAt: string;
 }

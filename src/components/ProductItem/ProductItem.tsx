@@ -10,7 +10,11 @@ import {
 } from '@mui/material';
 import type { ProductItemProps } from './type';
 
-export function ProductItem({ product, onToggleStatus }: ProductItemProps) {
+export function ProductItem({
+  product,
+  onToggleStatus,
+  onSelect,
+}: ProductItemProps) {
   const isActive = product.status === 'active';
 
   return (
@@ -49,7 +53,12 @@ export function ProductItem({ product, onToggleStatus }: ProductItemProps) {
               {product.type}
             </Typography>
             <CardActions>
-              <Button size="small" color="primary" sx={{ marginLeft: -1 }}>
+              <Button
+                size="small"
+                color="primary"
+                sx={{ marginLeft: -1 }}
+                onClick={() => onSelect(product)}
+              >
                 Saiba Mais
               </Button>
             </CardActions>

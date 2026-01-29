@@ -1,25 +1,44 @@
-import { ProductItem } from '@/components/ProductItem/productItem';
+import { ProductList } from '@/components/ProductList/ProductList';
+import { SearchInput } from '@/components/SearchInput/SearchInput';
+import type { FinancialProduct } from '@/types/Product';
+import { Box } from '@mui/material';
+import { useMemo, useState } from 'react';
 import { useProducts } from '@/hooks/useProducts';
-import { Grid } from '@mui/material';
+import { ProductDetailsModal } from '@/components/ProductDetailsModal/ProductDetailsModal';
 
 export function ProductsPage() {
+  const [search, setSearch] = useState('');
+  const [selectedProduct, setSelectedProduct] =
+    useState<FinancialProduct | null>(null);
+
   const { products, toggleProductStatus } = useProducts();
 
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [products, search]);
+
+  const hasError = search.length > 0 && filteredProducts.length === 0;
+
   return (
-    <Grid
-      container
-      spacing={{ xs: 1, md: 3 }}
-      columns={{ xs: 2, sm: 8, md: 12 }}
-    >
-      {products.map((product) => (
-        <Grid size={{ xs: 2, sm: 4, md: 4 }}>
-          <ProductItem
-            key={product.id}
-            product={product}
-            onToggleStatus={toggleProductStatus}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <Box>
+      <SearchInput
+        value={search}
+        onChange={setSearch}
+        error={hasError}
+        helperText={hasError ? 'Nenhum produto encontrado' : undefined}
+      />
+      <ProductList
+        products={filteredProducts}
+        onSelectProduct={setSelectedProduct}
+        onToggleStatus={toggleProductStatus}
+      />
+      <ProductDetailsModal
+        product={selectedProduct}
+        open={Boolean(selectedProduct)}
+        onClose={() => setSelectedProduct(null)}
+      />
+    </Box>
   );
 }
