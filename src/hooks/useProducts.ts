@@ -1,14 +1,28 @@
 import { useState } from 'react';
 import type { FinancialProduct } from '@/types/Product';
-import { financialProductsMock } from '@/mocks/financialProducts.mock';
+import { productService } from '@/services/productService';
 
 type RequestStatus = 'idle' | 'loading' | 'success' | 'error';
 
-
 export function useProducts() {
-  const [products, setProducts] = useState<FinancialProduct[]>(financialProductsMock);
+  const [products, setProducts] = useState<FinancialProduct[]>([]);
   const [status, setStatus] = useState<RequestStatus>('idle');
+  const [error, setError] = useState<string | null>(null);
 
+  const fetchProducts = async () => {
+    try {
+      setStatus('loading');
+      setError(null);
+
+      const data = await productService.getProducts();
+      setProducts(data);
+
+      setStatus('success');
+    } catch {
+      setError('Não foi possível carregar os produtos.');
+      setStatus('error');
+    }
+  };
 
   const toggleProductStatus = async (productId: string) => {
     setProducts((prev) =>
@@ -25,6 +39,9 @@ export function useProducts() {
 
   return {
     products,
+    status,
+    error,
+    fetchProducts,
     toggleProductStatus,
   };
 }

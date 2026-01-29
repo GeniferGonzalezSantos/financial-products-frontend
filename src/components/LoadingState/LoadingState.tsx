@@ -11,7 +11,7 @@ export function LoadingState({ message = 'Carregando...' }: LoadingStateProps) {
       minHeight="200px"
       aria-busy="true"
     >
-      <CircularProgress color='warning'/>
+      <CircularProgress color="warning" />
       <Typography mt={2} variant="body1" color="text.secondary">
         {message}
       </Typography>
