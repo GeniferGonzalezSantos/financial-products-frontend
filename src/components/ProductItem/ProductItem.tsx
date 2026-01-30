@@ -45,6 +45,21 @@ export function ProductItem({
               checked={isActive}
               onChange={() => onToggleStatus(product.id)}
               color="warning"
+              sx={{
+                '& .MuiSwitch-switchBase': {
+                  '&.Mui-focusVisible': {
+                    backgroundColor: 'rgba(237, 108, 2, 0.2)',
+                    outline: '2px solid #ed6c02',
+                    outlineOffset: -2,
+                  },
+                  '&:hover': {
+                    backgroundColor: 'rgba(237, 108, 2, 0.1)',
+                  },
+                },
+                '& .MuiSwitch-switchBase.Mui-focusVisible + .MuiSwitch-track': {
+                  boxShadow: '0 0 0 2px #ed6c02',
+                },
+              }}
             />
           </Box>
           <Box sx={{ textAlign: 'left' }}>
@@ -56,7 +71,18 @@ export function ProductItem({
               <Button
                 size="small"
                 color="primary"
-                sx={{ marginLeft: -1 }}
+                disableRipple
+                sx={{
+                  marginLeft: -1,
+
+                  '&.Mui-focusVisible': {
+                    outline: '2px solid blue',
+                    backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                  },
+                  '&:hover': {
+                    backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                  },
+                }}
                 onClick={() => onSelect(product)}
               >
                 Saiba Mais

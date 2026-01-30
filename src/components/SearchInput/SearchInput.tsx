@@ -21,7 +21,14 @@ export function SearchInput({
         type="search"
         label="Buscar produto"
         placeholder="Digite o nome do produto"
-        sx={{ m: 5, width: '50%' }}
+        sx={{
+          m: 5,
+          width: '50%',
+          '& input::-webkit-search-decoration, & input::-webkit-search-cancel-button, & input::-webkit-search-results-button, & input::-webkit-search-results-decoration':
+            {
+              display: 'none',
+            },
+        }}
         value={value}
         error={error}
         helperText={helperText}
@@ -36,6 +43,11 @@ export function SearchInput({
           },
           htmlInput: {
             'aria-label': 'Buscar produto pelo nome',
+            'aria-invalid': error ? 'true' : 'false',
+          },
+          formHelperText: {
+            role: 'alert',
+            'aria-live': 'assertive',
           },
         }}
       />

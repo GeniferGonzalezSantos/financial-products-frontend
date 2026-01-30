@@ -26,7 +26,17 @@ export function ErrorState({
         variant="contained"
         color="primary"
         onClick={onRetry}
-        sx={{ mt: 2 }}
+        disableRipple
+        sx={{
+          mt: 2,
+          '&.Mui-focusVisible': {
+            outline: '2px solid blue',
+            backgroundColor: 'rgba(25, 118, 210, 0.08)',
+          },
+          '&:hover': {
+            backgroundColor: 'rgba(25, 118, 210, 0.08)',
+          },
+        }}
       >
         Tentar novamente
       </Button>
