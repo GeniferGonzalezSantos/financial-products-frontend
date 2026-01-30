@@ -1,73 +1,111 @@
-# React + TypeScript + Vite
+# 📌 Financial Products – Frontend Case
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido como parte de um processo seletivo para a vaga de Desenvolvedora Front-end Pleno, com o objetivo de implementar uma funcionalidade de listagem e detalhamento de produtos financeiros em uma área logada de um banco digital.
 
-Currently, two official plugins are available:
+<h3> 🎯 Objetivo da aplicação </h3>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Permitir que o usuário:
 
-## React Compiler
+- Visualize uma lista de produtos financeiros
+- Filtre produtos pelo nome
+- Veja detalhes de um produto específico
+- Ative ou desative produtos
+- Tenha feedback visual de carregamento e erros
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<h3> 🧠 Tecnologias utilizadas </h3>
 
-## Expanding the ESLint configuration
+- React com TypeScript
+- Vite para setup e build
+- Material UI (MUI) para componentes visuais e responsividade
+- Jest + Testing Library para testes unitários
+- Mock local de API para simular consumo de dados
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<h3> ▶️ Como rodar o projeto </h3>
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+``npm install``
+``npm run dev``
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Para rodar os testes:
+``npm run test``
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<h3> 🏗️ Arquitetura e organização </h3>
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+A aplicação foi organizada priorizando separação de responsabilidades, reutilização de componentes e facilidade de manutenção.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+src/
+├─ components/
+│  ├─ ProductList/
+│  ├─ ProductItem/
+│  ├─ ProductDetails/
+│  ├─ SearchInput/
+│  ├─ LoadingState/
+│  └─ ErrorState/
+├─ hooks/
+│  └─ useProducts.ts
+├─ services/
+│  └─ productService.ts
+├─ types/
+│  └─ Product.ts
+├─ pages/
+│  └─ ProductsPage.tsx
+├─ App.tsx
+└─ main.tsx
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<h3> 🔹 Por quê essa estrutura? </h3>
+
+- components: UI reutilizável e desacoplada
+- hooks: lógica de estado e dados isolada da UI
+- services: centralização das chamadas de API
+- types: tipagem forte e consistente
+
+<h3> 🌐 Comunicação com a API </h3>
+
+A aplicação consome uma API mockada localmente, simulando uma API REST.
+
+Decisão tomada para:
+
+- Evitar instabilidades de APIs públicas
+- Garantir controle total do contrato de dados
+- Facilitar testes e previsibilidade
+- As chamadas são centralizadas em productService.ts e tratadas com try/catch.
+
+<h3> 🔄 Gerenciamento de estado </h3>
+
+- useState e useEffect
+- Hook customizado (useProducts) para:
+- Buscar produtos
+- Controlar loading e erro
+- Gerenciar alteração de status
+
+<h3> 🎨 UI, usabilidade e acessibilidade </h3>
+
+- Layout responsivo (desktop e mobile)
+- Modal para exibição de detalhes
+- Estados visuais claros para loading e erro
+
+<h3>## Componentes acessíveis: </h3>
+
+- Labels em inputs
+- Botões navegáveis via teclado
+- Uso de elementos semânticos
+- Acessibilidade para NVDA
+
+<h3> ⚡ Performance </h3>
+
+- Uso de useMemo para otimizar o filtro de produtos
+- Componentes pequenos para evitar re-renderizações desnecessárias
+
+<h3> 🧪 Testes </h3>
+
+- Foram implementados testes unitários utilizando Jest e Testing Library, cobrindo:
+- Renderização da lista de produtos
+- Interação do usuário (filtro ou alteração de status)
+
+<h5> Em um cenário de produção, também seriam aplicados: </h5>
+
+- Testes de integração
+- Testes E2E para fluxos críticos
+
+<h3> 📌 Considerações finais </h3>
+
+O foco do projeto foi demonstrar boas práticas de front-end, clareza arquitetural, usabilidade e capacidade de tomada de decisão técnica, mantendo a solução simples e eficiente.
