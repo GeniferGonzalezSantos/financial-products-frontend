@@ -83,12 +83,12 @@ Decisão tomada para:
 - Modal para exibição de detalhes
 - Estados visuais claros para loading e erro
 
-<h3>## Componentes acessíveis: </h3>
+- <h3>Componentes acessíveis: </h3>
 
-- Labels em inputs
-- Botões navegáveis via teclado
-- Uso de elementos semânticos
-- Acessibilidade para NVDA
+  - Labels em inputs
+  - Botões navegáveis via teclado
+  - Uso de elementos semânticos
+  - Acessibilidade para NVDA
 
 <h3> ⚡ Performance </h3>
 
