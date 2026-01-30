@@ -43,7 +43,20 @@ export function ProductDetailsModal({
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose} variant="contained">
+        <Button
+          onClick={onClose}
+          variant="contained"
+          disableRipple
+          sx={{
+            '&.Mui-focusVisible': {
+              outline: '2px solid blue',
+              backgroundColor: 'rgba(25, 118, 210, 0.9 )',
+            },
+            '&:hover': {
+              backgroundColor: 'rgba(25, 118, 210, 0.9)',
+            },
+          }}
+        >
           Fechar
         </Button>
       </DialogActions>
