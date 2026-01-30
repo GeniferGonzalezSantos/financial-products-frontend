@@ -32,6 +32,7 @@ Para rodar os testes:
 
 A aplicação foi organizada priorizando separação de responsabilidades, reutilização de componentes e facilidade de manutenção.
 
+```
 src/
 ├─ components/
 │  ├─ ProductList/
@@ -50,6 +51,7 @@ src/
 │  └─ ProductsPage.tsx
 ├─ App.tsx
 └─ main.tsx
+```
 
 <h3> 🔹 Por quê essa estrutura? </h3>
 
